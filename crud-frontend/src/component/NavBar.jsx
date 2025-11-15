@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
 
-export const NavBar = () => {
+export const NavBar = ({onOpen}) => {
   const [search, setSearch] = useState('');
 
   const handleSearch = (e) => {
@@ -73,7 +73,7 @@ export const NavBar = () => {
           onChange={handleSearch}
           className="input input-bordered input-sm w-full max-w-xs"
         />
-        <a className="btn btn-primary">Button</a>
+        <a className="btn btn-primary" onClick={onOpen}>Add Client</a>
       </div>
     </div>
 
