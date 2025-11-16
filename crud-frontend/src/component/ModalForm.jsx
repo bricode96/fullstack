@@ -24,7 +24,7 @@ export const ModalForm = ({ isOpen, onClose, mode, onSubmit }) => {
             isactive: status
         });
 
-        onClose(); // cerrar modal
+        onClose();
     };
 
     return (
@@ -34,7 +34,6 @@ export const ModalForm = ({ isOpen, onClose, mode, onSubmit }) => {
                     {mode === 'edit' ? 'Edit Client' : 'Client Details'}
                 </h3>
 
-                {/* ❌ QUITAR method="dialog" */}
                 <form onSubmit={handleSubmit}>
 
                     <label className="input input-bordered my-4 flex items-center gap-2">
