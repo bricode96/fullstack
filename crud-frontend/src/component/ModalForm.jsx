@@ -1,6 +1,6 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 
-export const ModalForm = ({ isOpen, onClose, mode, onSubmit }) => {
+export const ModalForm = ({ isOpen, onClose, mode, OnSubmit, clientData }) => {
 
     const [rate, setRate] = useState("");
     const [name, setName] = useState("");
@@ -12,20 +12,32 @@ export const ModalForm = ({ isOpen, onClose, mode, onSubmit }) => {
         setStatus(e.target.value === 'Active');
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-
-        // Enviar datos al padre
-        onSubmit({
-            name,
-            email,
-            job,
-            rate,
-            isactive: status
-        });
-
-        onClose();
+        try{
+            const clientData = {name, email, job, rate: Number(rate), isactive: status}
+            await OnSubmit(clientData)
+             onClose();
+        }catch(error){
+            console.error("Error adding client", error)
+        }
     };
+
+    useEffect(() => {
+        if(mode === 'edit' && clientData){
+            setName(clientData.name)
+            setEmail(clientData.email)
+            setJob(clientData.job)
+            setRate(clientData.rate)
+            setStatus(clientData.isActive)
+        }else{
+            setName('')
+            setEmail('')
+            setJob('')
+            setRate('')
+            setStatus(false)
+        }
+    }, [mode, clientData])
 
     return (
         <dialog id="my_modal_3" className="modal" open={isOpen}>

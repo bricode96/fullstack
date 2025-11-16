@@ -1,14 +1,8 @@
-import React, { useState } from 'react';
-
-
-export const NavBar = ({onOpen}) => {
-  const [search, setSearch] = useState('');
-
-  const handleSearch = (e) => {
-    setSearch(e.target.value);
-    console.log('Buscando:', e.target.value); // Aquí puedes conectar tu lógica de búsqueda
-  };
-
+export const NavBar = ({onOpen, onSearch}) => {
+  
+  const handleSearchChange = (event) =>{
+     onSearch(event.target.value);
+  }
   return (
     
     <div className="navbar bg-base-100 shadow-sm">
@@ -69,8 +63,7 @@ export const NavBar = ({onOpen}) => {
         <input
           type="text"
           placeholder="Buscar..."
-          value={search}
-          onChange={handleSearch}
+          onChange={handleSearchChange}
           className="input input-bordered input-sm w-full max-w-xs"
         />
         <a className="btn btn-primary" onClick={onOpen}>Add Client</a>
